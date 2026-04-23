@@ -84,11 +84,11 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
 
    protected ListaSimplementeEnlazada<T> getListaOrdenCentral(Nodo<T> actual, ListaSimplementeEnlazada DatosCentral){
        if(actual==null){
-           return null;
+           return DatosCentral;
        }
        getListaOrdenCentral(actual.getIzquierda(), DatosCentral);
        DatosCentral.add(actual.getDato());
-       getListaOrdenCentral(actual.getIzquierda(), DatosCentral);
+       getListaOrdenCentral(actual.getDerecha(), DatosCentral);
        return DatosCentral;
    }
 
@@ -106,7 +106,7 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
 
    protected ListaSimplementeEnlazada<T> getListaPostorden(Nodo<T> actual, ListaSimplementeEnlazada DatosPost){
         if(actual==null){
-            return null;
+            return DatosPost;
         }
         getListaPostorden(actual.getIzquierda(), DatosPost);
         getListaPostorden(actual.getDerecha(), DatosPost);
