@@ -54,8 +54,8 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
         if (actual==null){
             return 0;
         }
-        int alturaIzquierda=getAltura(actual.izquierda);
-        int alturaDerecha=getAltura(actual.derecha);
+        int alturaIzquierda=getAltura(actual.getIzquierda());
+        int alturaDerecha=getAltura(actual.getDerecha());
         return 1 + Math.max(alturaDerecha,alturaIzquierda);
     }
 
@@ -158,7 +158,37 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
         return getGrado(raiz);
    }
 
+    protected ListaSimplementeEnlazada<T> getCamino(T dato){
+        ListaSimplementeEnlazada<T> camino=new ListaSimplementeEnlazada<>();
+        getCamino(raiz, dato,camino);
+        return camino;
+    }
 
 
+    protected ListaSimplementeEnlazada<T> getCamino(Nodo<T> actual, T dato, ListaSimplementeEnlazada<T> camino){
+
+        if (actual == null){
+            return null;
+        }
+
+        camino.add(actual.getDato());
+
+        if(actual.getDato().compareTo(dato)==0){
+
+            return camino;
+
+        }
+        else if(actual.getDato().compareTo(dato)>0){
+        getCamino(actual.getIzquierda(),dato,camino);
+
+        }
+        else if(actual.getDato().compareTo(dato)<0){
+        getCamino(actual.getDerecha(),dato, camino);
+
+        }
+
+        return camino;
+
+}
 
 }
