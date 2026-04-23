@@ -158,35 +158,43 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
         return getGrado(raiz);
    }
 
-    protected ListaSimplementeEnlazada<T> getCamino(T dato){
+
+    // Devuelve una lista con el camino desde la raíz hasta el dato buscado.
+   public ListaSimplementeEnlazada<T> getCamino(T dato){
 
 
         ListaSimplementeEnlazada<T> camino=new ListaSimplementeEnlazada<>();
+
         boolean encontrado= getCamino(raiz, dato,camino);
+
+       // Si el dato no se encuentra, devuelve una lista vacía.
        if(encontrado==false){
            return new ListaSimplementeEnlazada<>();
        }
         return camino;
     }
 
-
+    // Método auxiliar recursivo que busca el dato en el árbol binario de búsqueda.
     protected boolean getCamino(Nodo<T> actual, T dato, ListaSimplementeEnlazada<T> camino) {
-
+        // Recorre recursivamente el árbol desde el nodo actual.
+        // Si el nodo es null, el dato no se ha encontrado en esta rama.
 
         if (actual == null) {
             return false;
         }
-
+        // Va añadiendo a la lista los datos de los nodos por los que pasa.
         camino.add(actual.getDato());
 
         if (actual.getDato().compareTo(dato) == 0) {
-
+            // Si encuentra el dato, devuelve true.
             return true;
 
         } else if (actual.getDato().compareTo(dato) > 0) {
+            // Si el dato buscado es menor, continúa por la izquierda.
             return getCamino(actual.getIzquierda(), dato, camino);
 
         } else {
+            // Si es mayor, continúa por la derecha.
             return getCamino(actual.getDerecha(), dato, camino);
 
         }
