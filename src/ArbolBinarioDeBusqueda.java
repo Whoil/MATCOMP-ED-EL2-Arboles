@@ -159,36 +159,41 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
    }
 
     protected ListaSimplementeEnlazada<T> getCamino(T dato){
+
+
         ListaSimplementeEnlazada<T> camino=new ListaSimplementeEnlazada<>();
-        getCamino(raiz, dato,camino);
+        boolean encontrado= getCamino(raiz, dato,camino);
+       if(encontrado==false){
+           return new ListaSimplementeEnlazada<>();
+       }
         return camino;
     }
 
 
-    protected ListaSimplementeEnlazada<T> getCamino(Nodo<T> actual, T dato, ListaSimplementeEnlazada<T> camino){
+    protected boolean getCamino(Nodo<T> actual, T dato, ListaSimplementeEnlazada<T> camino) {
 
-        if (actual == null){
-            return null;
+
+        if (actual == null) {
+            return false;
         }
 
         camino.add(actual.getDato());
 
-        if(actual.getDato().compareTo(dato)==0){
+        if (actual.getDato().compareTo(dato) == 0) {
 
-            return camino;
+            return true;
 
-        }
-        else if(actual.getDato().compareTo(dato)>0){
-        getCamino(actual.getIzquierda(),dato,camino);
+        } else if (actual.getDato().compareTo(dato) > 0) {
+            return getCamino(actual.getIzquierda(), dato, camino);
 
-        }
-        else if(actual.getDato().compareTo(dato)<0){
-        getCamino(actual.getDerecha(),dato, camino);
+        } else {
+            return getCamino(actual.getDerecha(), dato, camino);
 
         }
+    }
 
-        return camino;
 
-}
+
+
 
 }
