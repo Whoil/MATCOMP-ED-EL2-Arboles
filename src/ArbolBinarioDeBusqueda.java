@@ -252,7 +252,7 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
         return(isEquilibrado(raiz));
     }
 
-    public boolean isEquilibrado(Nodo<T> actual){
+    protected boolean isEquilibrado(Nodo<T> actual){
         //Caso base, si no existen más nodos devuelve true
         if (actual==null){
             return true;
@@ -273,6 +273,30 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
 
 
     }
+
+    public ListaSE<T> getListaDatosNivel(int nivel){
+        ListaSE<T> ListaDatosNivel= new ListaSE<>();
+        return getListaDatosNivel(raiz, nivel, 1,ListaDatosNivel);
+    }
+
+    private ListaSE<T> getListaDatosNivel(Nodo<T> actual, int nivelBuscado, int nivelActual, ListaSE<T> ListaNivel){
+        if (actual==null){
+            return ListaNivel;
+        }
+
+        if(nivelActual==nivelBuscado){
+            ListaNivel.add(actual.getDato());
+            return ListaNivel;
+        }
+        getListaDatosNivel(actual.getIzquierda(),nivelBuscado,nivelActual+1,ListaNivel);
+        getListaDatosNivel(actual.getDerecha(),nivelBuscado,nivelActual+1,ListaNivel);
+
+        return ListaNivel;
+
+
+    }
+
+
 
 
 
