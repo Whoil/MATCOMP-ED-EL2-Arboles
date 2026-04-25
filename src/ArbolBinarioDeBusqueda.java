@@ -316,6 +316,44 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
 
 
 
+    }
+
+
+    public boolean isArbolCompleto(){
+        return isArbolCompleto(raiz, 1 ,getAlturaRaiz() );
+    }
+
+
+    private boolean isArbolCompleto(Nodo<T> actual, int NivelActual, int NivelArbol ){
+
+
+        if (actual==null) return true;
+        if(actual.getIzquierda()==null && actual.getDerecha()==null){
+            if (NivelArbol==NivelActual) return true;
+            else return false;
+        }
+        else{
+            return isArbolCompleto(actual.getDerecha(), NivelActual+1,NivelArbol) && isArbolCompleto(actual.getIzquierda(),NivelActual+1,NivelArbol);
+        }
+
+
+    }
+
+    public boolean isArbolCasiCompleto(){
+        return isArbolCasiCompleto(raiz,1,getAlturaRaiz());
+    }
+
+    public boolean isArbolCasiCompleto(Nodo<T> actual, int NivelActual, int nivelArbol){
+
+        if(actual==null)return true;
+        if(actual.getIzquierda()==null && actual.getDerecha()==null){
+            if (nivelArbol==NivelActual){
+                if
+            }
+        }
+
+
+
 
 
     }
