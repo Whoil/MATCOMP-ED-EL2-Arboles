@@ -345,15 +345,36 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
 
     public boolean isArbolCasiCompleto(Nodo<T> actual, int NivelActual, int nivelArbol){
 
-        if(actual==null)return true;
-        if(actual.getIzquierda()==null && actual.getDerecha()==null){
-            if (nivelArbol==NivelActual){
-                if
+        Cola<Nodo<T>> cola = new Cola<>();
+        cola.offer(raiz);
+
+        boolean huecoEncontrado = false;
+
+        while (!cola.isEmpty()) {
+            actual = cola.poll();
+
+            // Hijo izquierdo
+            if (actual.getIzquierda() != null) {
+                if (huecoEncontrado) {
+                    return false;
+                }
+                cola.offer(actual.getIzquierda());
+            } else {
+                huecoEncontrado = true;
+            }
+
+            // Hijo derecho
+            if (actual.getDerecha() != null) {
+                if (huecoEncontrado) {
+                    return false;
+                }
+                cola.offer(actual.getDerecha());
+            } else {
+                huecoEncontrado = true;
             }
         }
 
-
-
+        return true;
 
 
     }

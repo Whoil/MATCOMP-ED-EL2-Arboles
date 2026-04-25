@@ -1,7 +1,12 @@
-public class Nodo< T  extends Comparable<T> >{
+public class Nodo< T  extends Comparable<T> >implements Comparable<Nodo<T>>{
    protected T dato;
    protected Nodo<T> izquierda;
    protected Nodo<T> derecha;
+
+    @Override
+    public int compareTo(Nodo<T> otro) {
+        return this.getDato().compareTo(otro.getDato());
+    }
 
    public Nodo(T dato, Nodo<T> izquierda, Nodo<T> derecha){
        this.dato=dato;
