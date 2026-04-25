@@ -1,3 +1,4 @@
+
 public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
     private Nodo<T> raiz;
 
@@ -66,12 +67,12 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
     }
 
 
-    protected  ListaSimplementeEnlazada<T> getListaPreOrden(){
-        ListaSimplementeEnlazada<T> DatosPre=new ListaSimplementeEnlazada<>();
+    protected  ListaSE<T> getListaPreOrden(){
+        ListaSE<T> DatosPre=new ListaSE<>();
         return getListaPreOrden(raiz, DatosPre);
     }
 
-   protected ListaSimplementeEnlazada<T> getListaPreOrden(Nodo<T> actual, ListaSimplementeEnlazada<T> DatosPre){
+   protected ListaSE<T> getListaPreOrden(Nodo<T> actual, ListaSE<T> DatosPre){
         if(actual==null){
             return DatosPre;
         }
@@ -82,7 +83,7 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
 
    }
 
-   protected ListaSimplementeEnlazada<T> getListaOrdenCentral(Nodo<T> actual, ListaSimplementeEnlazada DatosCentral){
+   protected ListaSE<T> getListaOrdenCentral(Nodo<T> actual, ListaSE<T> DatosCentral){
        if(actual==null){
            return DatosCentral;
        }
@@ -92,19 +93,19 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
        return DatosCentral;
    }
 
-   protected ListaSimplementeEnlazada<T> getListaordenCentral(){
-        ListaSimplementeEnlazada<T> DatosCentral= new ListaSimplementeEnlazada<>();
+   protected ListaSE<T> getListaordenCentral(){
+       ListaSE<T> DatosCentral= new ListaSE<>();
         return getListaOrdenCentral(raiz,DatosCentral);
    }
 
 
-   protected ListaSimplementeEnlazada<T> getListaPostOrden(){
-        ListaSimplementeEnlazada DatosPost=new ListaSimplementeEnlazada<>();
+   protected ListaSE<T> getListaPostOrden(){
+        ListaSE<T> DatosPost=new ListaSE<>();
         return getListaPostorden(raiz,DatosPost);
    }
 
 
-   protected ListaSimplementeEnlazada<T> getListaPostorden(Nodo<T> actual, ListaSimplementeEnlazada DatosPost){
+   protected ListaSE<T> getListaPostorden(Nodo<T> actual, ListaSE<T> DatosPost){
         if(actual==null){
             return DatosPost;
         }
@@ -160,22 +161,22 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
 
 
     // Devuelve una lista con el camino desde la raíz hasta el dato buscado.
-   public ListaSimplementeEnlazada<T> getCamino(T dato){
+   public ListaSE<T> getCamino(T dato){
 
 
-        ListaSimplementeEnlazada<T> camino=new ListaSimplementeEnlazada<>();
+       ListaSE<T> camino=new ListaSE<>();
 
         boolean encontrado= getCamino(raiz, dato,camino);
 
        // Si el dato no se encuentra, devuelve una lista vacía.
        if(encontrado==false){
-           return new ListaSimplementeEnlazada<>();
+           return new ListaSE<>();
        }
         return camino;
     }
 
     // Método auxiliar recursivo que busca el dato en el árbol binario de búsqueda.
-    protected boolean getCamino(Nodo<T> actual, T dato, ListaSimplementeEnlazada<T> camino) {
+    protected boolean getCamino(Nodo<T> actual, T dato, ListaSE<T> camino) {
         // Recorre recursivamente el árbol desde el nodo actual.
         // Si el nodo es null, el dato no se ha encontrado en esta rama.
 
