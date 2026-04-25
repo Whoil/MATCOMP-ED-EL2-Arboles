@@ -247,6 +247,33 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
         }
     }
 
+    //Comprueba que el árbol está equilibrado
+    public boolean isEquilibrado(){
+        return(isEquilibrado(raiz));
+    }
+
+    public boolean isEquilibrado(Nodo<T> actual){
+        //Caso base, si no existen más nodos devuelve true
+        if (actual==null){
+            return true;
+        }
+        //Se calcula la altura del subárbol derecho
+        int alturaDerecha = getAltura(actual.getDerecha());
+
+        //Se calcula la altura del subárbol izquierdo
+        int alturaIzquierda= getAltura(actual.getIzquierda());
+
+        //Se comprueba si existe desequilibrio
+        if (Math.abs(alturaIzquierda-alturaDerecha)>1){
+            return false;
+        }
+
+        //Repetimos el proceso de manera recursiva
+        return isEquilibrado(actual.getIzquierda()) && isEquilibrado(actual.getDerecha());
+
+
+    }
+
 
 
 
