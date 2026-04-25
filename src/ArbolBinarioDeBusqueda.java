@@ -297,6 +297,30 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
     }
 
 
+    public boolean  isArbolHomogeneo(){
+        return isArbolHomogeneo(raiz);
+    }
+
+    private boolean isArbolHomogeneo(Nodo<T> actual){
+        if ((actual==null)){
+            return true;
+        }
+
+
+        else if (actual.getDerecha()!=null &&actual.getIzquierda()!=null){
+            return isArbolHomogeneo(actual.getIzquierda()) && isArbolHomogeneo(actual.getDerecha());
+        }
+        else if(actual.getDerecha()==null &&actual.getIzquierda()==null)return true;
+
+        else return false;
+
+
+
+
+
+    }
+
+
 
 
 
