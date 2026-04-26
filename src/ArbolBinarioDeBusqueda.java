@@ -281,6 +281,71 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
     }
 
 
+    protected int getFactorEquilibrio(Nodo<T> nodo) {
+        if (nodo == null) {
+            return 0;
+        }
+
+        return getAltura(nodo.getIzquierda()) - getAltura(nodo.getDerecha());
+    }
+    // Hace una rotación a la derecha y devuelve la nueva raíz del subárbol.
+    protected Nodo<T> girarDerecha(Nodo<T> nodo) {
+        Nodo<T> nuevaRaiz = nodo.getIzquierda();
+        Nodo<T> subArbolMovido = nuevaRaiz.getDerecha();
+
+        nuevaRaiz.setDerecha(nodo);
+        nodo.setIzquierda(subArbolMovido);
+
+        return nuevaRaiz;
+    }
+    // Hace una rotación a la izquierda y devuelve la nueva raíz del subárbol.
+    protected Nodo<T> girarIzquierda(Nodo<T> nodo) {
+        Nodo<T> nuevaRaiz = nodo.getDerecha();
+        Nodo<T> subArbolMovido = nuevaRaiz.getIzquierda();
+
+        nuevaRaiz.setIzquierda(nodo);
+        nodo.setDerecha(subArbolMovido);
+
+        return nuevaRaiz;
+    }
+    // Equilibra el subárbol cuya raíz es el nodo indicado.
+// Si el subárbol ya está equilibrado, lo devuelve tal cual.
+// Si no, aplica la rotación que corresponda.
+    protected Nodo<T> equilibrarArbol(Nodo<T> nodo) {
+        if (nodo == null) {
+            return nodo;
+        }
+
+        int equilibrio = getFactorEquilibrio(nodo);
+
+        // El árbol pesa demasiado hacia la izquierda
+        if (equilibrio > 1) {
+
+            // Caso izquierda-derecha
+            if (getFactorEquilibrio(nodo.getIzquierda()) < 0) {
+                nodo.setIzquierda(girarIzquierda(nodo.getIzquierda()));
+            }
+
+            // Caso izquierda-izquierda
+            return girarDerecha(nodo);
+        }
+
+        // El árbol pesa demasiado hacia la derecha
+        if (equilibrio < -1) {
+
+            // Caso derecha-izquierda
+            if (getFactorEquilibrio(nodo.getDerecha()) > 0) {
+                nodo.setDerecha(girarDerecha(nodo.getDerecha()));
+            }
+
+            // Caso derecha-derecha
+            return girarIzquierda(nodo);
+        }
+
+        return nodo;
+    }
+
+
     // Devuelve una lista con los datos que se encuentran en el nivel indicado del árbol.
     public ListaSE<T> getListaDatosNivel(int nivel){
         ListaSE<T> ListaDatosNivel= new ListaSE<>();
@@ -420,69 +485,7 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
         return true;
     }
 
-    protected int getFactorEquilibrio(Nodo<T> nodo) {
-        if (nodo == null) {
-            return 0;
-        }
 
-        return getAltura(nodo.getIzquierda()) - getAltura(nodo.getDerecha());
-    }
-    // Hace una rotación a la derecha y devuelve la nueva raíz del subárbol.
-    protected Nodo<T> girarDerecha(Nodo<T> nodo) {
-        Nodo<T> nuevaRaiz = nodo.getIzquierda();
-        Nodo<T> subArbolMovido = nuevaRaiz.getDerecha();
-
-        nuevaRaiz.setDerecha(nodo);
-        nodo.setIzquierda(subArbolMovido);
-
-        return nuevaRaiz;
-    }
-    // Hace una rotación a la izquierda y devuelve la nueva raíz del subárbol.
-    protected Nodo<T> girarIzquierda(Nodo<T> nodo) {
-        Nodo<T> nuevaRaiz = nodo.getDerecha();
-        Nodo<T> subArbolMovido = nuevaRaiz.getIzquierda();
-
-        nuevaRaiz.setIzquierda(nodo);
-        nodo.setDerecha(subArbolMovido);
-
-        return nuevaRaiz;
-    }
-    // Equilibra el subárbol cuya raíz es el nodo indicado.
-// Si el subárbol ya está equilibrado, lo devuelve tal cual.
-// Si no, aplica la rotación que corresponda.
-    protected Nodo<T> equilibrarArbol(Nodo<T> nodo) {
-        if (nodo == null) {
-            return nodo;
-        }
-
-        int equilibrio = getFactorEquilibrio(nodo);
-
-        // El árbol pesa demasiado hacia la izquierda
-        if (equilibrio > 1) {
-
-            // Caso izquierda-derecha
-            if (getFactorEquilibrio(nodo.getIzquierda()) < 0) {
-                nodo.setIzquierda(girarIzquierda(nodo.getIzquierda()));
-            }
-
-            // Caso izquierda-izquierda
-            return girarDerecha(nodo);
-        }
-
-        // El árbol pesa demasiado hacia la derecha
-        if (equilibrio < -1) {
-
-            // Caso derecha-izquierda
-            if (getFactorEquilibrio(nodo.getDerecha()) > 0) {
-                nodo.setDerecha(girarDerecha(nodo.getDerecha()));
-            }
-
-            // Caso derecha-derecha
-            return girarIzquierda(nodo);
-        }
-
-        return nodo;
-    }
 
 
 }

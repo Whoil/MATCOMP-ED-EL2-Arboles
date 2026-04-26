@@ -31,5 +31,23 @@ public class Main {
 
         System.out.println("Subárbol izquierdo en orden central: " + arbol.getSubArbolIzquierda().getListaOrdenCentral());
         System.out.println("Subárbol derecho en orden central: " + arbol.getSubArbolDerecha().getListaOrdenCentral());
+
+
+        ArbolBinarioDeBusqueda<Integer> arbolEquilibrado = new ArbolBinarioDeBusqueda<>();
+
+        arbolEquilibrado.add(1);
+        arbolEquilibrado.add(2);
+        arbolEquilibrado.add(3);
+        arbolEquilibrado.add(4);
+        arbolEquilibrado.add(5);
+
+        System.out.println();
+        System.out.println("PRUEBA DE EQUILIBRADO");
+        System.out.println("---------------------");
+        System.out.println("Orden central: " + arbolEquilibrado.getListaOrdenCentral());
+        System.out.println("Preorden: " + arbolEquilibrado.getListaPreOrden());
+        System.out.println("Altura del árbol: " + arbolEquilibrado.getAlturaRaiz());
+        System.out.println("¿Árbol equilibrado?: " + arbolEquilibrado.isEquilibrado());
+
     }
 }
