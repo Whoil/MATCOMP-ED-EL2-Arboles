@@ -1,3 +1,6 @@
+package ParteA;
+import Estructuras.ListaSE;
+
 public interface ArbolBinario < T extends Comparable<T>>{
     boolean isEmpty();
 

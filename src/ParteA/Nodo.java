@@ -1,3 +1,5 @@
+package ParteA;
+
 public class Nodo< T  extends Comparable<T> >implements Comparable<Nodo<T>>{
    protected T dato;
    protected Nodo<T> izquierda;

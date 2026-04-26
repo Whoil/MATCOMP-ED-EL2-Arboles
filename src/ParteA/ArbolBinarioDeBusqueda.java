@@ -1,8 +1,11 @@
+package ParteA;
+import Estructuras.ListaSE;
+import Estructuras.Cola;
 
-public class ArbolBinarioDeBusqueda<T extends Comparable<T>> implements ArbolBinario<T>{
+public class ArbolBinarioDeBusqueda<T extends Comparable<T>> implements ArbolBinario<T> {
 
 
-    //Nodo raiz del árbol
+    //ParteA.Nodo raiz del árbol
     private Nodo<T> raiz;
 
     //Constructor que inicializa el árbol con una raíz dada
@@ -38,11 +41,11 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>> implements ArbolBin
     }
 
     // Inserta un dato en el árbol de forma recursiva
-    protected Nodo<T> addNodo(Nodo<T> actual,T dato){
+    protected Nodo<T> addNodo(Nodo<T> actual, T dato){
         // Si no hay nodo en esta posición, se crea uno nuevo
         if(actual==null){
 
-            return new  Nodo<>(dato);
+            return new Nodo<>(dato);
 
         }
         //Comparamos de forma recursiva para decidir en qué dirección irá el dato
@@ -83,7 +86,7 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>> implements ArbolBin
     }
 
     //Crea una lista y la rellena del recorrido en preorden
-    public   ListaSE<T> getListaPreOrden(){
+    public ListaSE<T> getListaPreOrden(){
         ListaSE<T> DatosPre=new ListaSE<>();
         return getListaPreOrden(raiz, DatosPre);
     }
