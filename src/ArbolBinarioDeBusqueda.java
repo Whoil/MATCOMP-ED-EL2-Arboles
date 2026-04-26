@@ -27,6 +27,11 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
 
 
 
+    //Inserta un dato comenzando desde la raíz
+    public void add(T dato){
+        raiz = addNodo(raiz, dato);
+    }
+
     // Inserta un dato en el árbol de forma recursiva
     protected Nodo<T> addNodo(Nodo<T> actual,T dato){
         // Si no hay nodo en esta posición, se crea uno nuevo
@@ -50,10 +55,6 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
 
     }
 
-    //Inserta un dato comenzando desde la raíz
-    public void add(T dato){
-        raiz = addNodo(raiz, dato);
-    }
 
     //Obtiene la altura de uno de los nodos de manera recursiva
     protected int getAltura(Nodo<T> actual){
