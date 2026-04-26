@@ -38,28 +38,28 @@ Pongamos sobre la mesa algunas definiciones para poder después referirnos con p
 Estas definiciones serán relevantes para referirnos a los árboles de distintos tipos.
 
 ## Objetivo
-El objetivo del trabajo a realizar es construir el TAD ArbolBinarioDeBusqueda.
+El objetivo del trabajo a realizar es construir el TAD ParteA.ArbolBinarioDeBusqueda.
 Este árbol binario trabajará con un tipo de datos PARAMETRIZABLE y podrá recibir (añadir) nuevos elementos.
 Mantendrá los datos ordenados (usar interfaz "Comparable" de Java).
 
 Responderá a las preguntas:
 * getGrado():int
 * getAltura():int
-* getListaDatosNivel(nivel):Lista<TipoDato>
+* getListaDatosNivel(nivel):Estructuras.Lista<TipoDato>
 * isArbolHomogeneo():Boolean
 * isArbolCompleto():Boolean
 * isArbolCasiCompleto():Boolean
-* getCamino(<TipoDato>):Lista<TipoDato>
+* getCamino(<TipoDato>):Estructuras.Lista<TipoDato>
 
 Permitirá las operaciones:
 * add(<TipoDato>):void
-* getSubArbolIzquierda():ArbolBinarioDeBusqueda<TipoDato>
-* getSubArbolDerecha():ArbolBinarioDeBusqueda<TipoDato>
+* getSubArbolIzquierda():ParteA.ArbolBinarioDeBusqueda<TipoDato>
+* getSubArbolDerecha():ParteA.ArbolBinarioDeBusqueda<TipoDato>
 
 Generará 3 tipos de listas de datos, representando los datos que contiene:
-* getListaPreOrden():Lista<TipoDato>
-* getListaPostOrden():Lista<TipoDato>
-* getListaOrdenCentral:Lista<TipoDato>
+* getListaPreOrden():Estructuras.Lista<TipoDato>
+* getListaPostOrden():Estructuras.Lista<TipoDato>
+* getListaOrdenCentral:Estructuras.Lista<TipoDato>
 
 Estas listas contendrán los datos de los elementos que tenga el árbol organizados según el tipo de recorrido que se indique (preorden, postorden u orden central).
 
