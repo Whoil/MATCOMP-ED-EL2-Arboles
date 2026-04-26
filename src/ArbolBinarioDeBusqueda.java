@@ -309,8 +309,8 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>> implements ArbolBin
         return nuevaRaiz;
     }
     // Equilibra el subárbol cuya raíz es el nodo indicado.
-// Si el subárbol ya está equilibrado, lo devuelve tal cual.
-// Si no, aplica la rotación que corresponda.
+    // Si el subárbol ya está equilibrado, lo devuelve tal cual.
+    // Si no, aplica la rotación que corresponda.
     protected Nodo<T> equilibrarArbol(Nodo<T> nodo) {
         if (nodo == null) {
             return nodo;
