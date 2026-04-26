@@ -1,13 +1,35 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-void main() {
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    IO.println(String.format("Hello and welcome!"));
+public class Main {
+    public static void main(String[] args) {
 
-    for (int i = 1; i <= 5; i++) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        IO.println("i = " + i);
+        ArbolBinarioDeBusqueda<Integer> arbol = new ArbolBinarioDeBusqueda<>();
+
+        arbol.add(8);
+        arbol.add(3);
+        arbol.add(10);
+        arbol.add(1);
+        arbol.add(6);
+
+        System.out.println("ÁRBOL BINARIO DE BÚSQUEDA");
+        System.out.println("------------------------");
+
+        System.out.println("Altura del árbol: " + arbol.getAlturaRaiz());
+        System.out.println("Grado del árbol: " + arbol.getGrado());
+
+        System.out.println("Preorden: " + arbol.getListaPreOrden());
+        System.out.println("Orden central: " + arbol.getListaOrdenCentral());
+        System.out.println("Postorden: " + arbol.getListaPostOrden());
+
+        System.out.println("Camino hasta 6: " + arbol.getCamino(6));
+        System.out.println("Datos del nivel 1: " + arbol.getListaDatosNivel(1));
+        System.out.println("Datos del nivel 2: " + arbol.getListaDatosNivel(2));
+        System.out.println("Datos del nivel 3: " + arbol.getListaDatosNivel(3));
+
+        System.out.println("¿Árbol homogéneo?: " + arbol.isArbolHomogeneo());
+        System.out.println("¿Árbol completo?: " + arbol.isArbolCompleto());
+        System.out.println("¿Árbol casi completo?: " + arbol.isArbolCasiCompleto());
+        System.out.println("¿Árbol equilibrado?: " + arbol.isEquilibrado());
+
+        System.out.println("Subárbol izquierdo en orden central: " + arbol.getSubArbolIzquierda().getListaOrdenCentral());
+        System.out.println("Subárbol derecho en orden central: " + arbol.getSubArbolDerecha().getListaOrdenCentral());
     }
 }
