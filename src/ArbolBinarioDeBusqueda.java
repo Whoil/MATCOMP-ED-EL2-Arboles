@@ -97,7 +97,7 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
         }
 
         //Se inserta primero la raíz en la lista
-       DatosPre.add(actual.getDato());
+       DatosPre.addLast(actual.getDato());
         //Luego recorre el subárbol izquiedo
         getListaPreOrden(actual.getIzquierda(), DatosPre);
         //Finalmente recorre el subárbol derecho.
@@ -123,7 +123,7 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
         //Recorre el subárbol izquierdo
        getListaOrdenCentral(actual.getIzquierda(), DatosCentral);
         //Añade el dato del nodo actual
-       DatosCentral.add(actual.getDato());
+       DatosCentral.addLast(actual.getDato());
 
        // Recorre el subárbol derecho
        getListaOrdenCentral(actual.getDerecha(), DatosCentral);
@@ -147,7 +147,7 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
        // Recorre el subárbol derecho
         getListaPostorden(actual.getDerecha(), DatosPost);
        // Añade el dato del nodo actual
-        DatosPost.add(actual.getDato());
+        DatosPost.addLast(actual.getDato());
         return DatosPost;
    }
 
@@ -236,7 +236,7 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
             return false;
         }
         // Va añadiendo a la lista los datos de los nodos por los que pasa.
-        camino.add(actual.getDato());
+        camino.addLast(actual.getDato());
 
         if (actual.getDato().compareTo(dato) == 0) {
             // Si encuentra el dato, devuelve true.
@@ -291,7 +291,7 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
         }
 
         if(nivelActual==nivelBuscado){
-            ListaNivel.add(actual.getDato());
+            ListaNivel.addLast(actual.getDato());
             return ListaNivel;
         }
         getListaDatosNivel(actual.getIzquierda(),nivelBuscado,nivelActual+1,ListaNivel);
@@ -334,22 +334,29 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
 
 
         if (actual==null) return true;
-        if(actual.getIzquierda()==null && actual.getDerecha()==null){
-            if (NivelArbol==NivelActual) return true;
+        if (actual.getIzquierda() == null && actual.getDerecha() == null) {
+            if (NivelArbol == NivelActual) return true;
             else return false;
         }
-        else{
-            return isArbolCompleto(actual.getDerecha(), NivelActual+1,NivelArbol) && isArbolCompleto(actual.getIzquierda(),NivelActual+1,NivelArbol);
+
+        else if ((actual.getIzquierda() == null && actual.getDerecha() != null) ||
+                (actual.getIzquierda() != null && actual.getDerecha() == null)) {
+            return false;
+        }
+
+        else {
+            return isArbolCompleto(actual.getDerecha(), NivelActual + 1, NivelArbol)
+                    && isArbolCompleto(actual.getIzquierda(), NivelActual + 1, NivelArbol);
         }
 
 
     }
 
-    public boolean isArbolCasiCompleto(){
-        return isArbolCasiCompleto(raiz,1,getAlturaRaiz());
-    }
 
-    public boolean isArbolCasiCompleto(Nodo<T> actual, int NivelActual, int nivelArbol){
+    public boolean isArbolCasiCompleto() {
+        if (raiz == null) {
+            return true;
+        }
 
         Cola<Nodo<T>> cola = new Cola<>();
         cola.offer(raiz);
@@ -357,24 +364,28 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
         boolean huecoEncontrado = false;
 
         while (!cola.isEmpty()) {
-            actual = cola.poll();
+            Nodo<T> actual = cola.poll();
 
-            if (actual == null) {
-                huecoEncontrado = true;
-            } else {
+            if (actual.getIzquierda() != null) {
                 if (huecoEncontrado) {
                     return false;
                 }
-
                 cola.offer(actual.getIzquierda());
-                cola.offer(actual.getDerecha());
+            } else {
+                huecoEncontrado = true;
             }
 
+            if (actual.getDerecha() != null) {
+                if (huecoEncontrado) {
+                    return false;
+                }
+                cola.offer(actual.getDerecha());
+            } else {
+                huecoEncontrado = true;
             }
+        }
 
         return true;
-
-
     }
 
 
