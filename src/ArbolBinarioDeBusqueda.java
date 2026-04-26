@@ -10,6 +10,11 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
         this.raiz=raiz;
     }
 
+    //Constructor vacío
+    public ArbolBinarioDeBusqueda() {
+        this.raiz = null;
+    }
+
     //Devuelve la raíz del árbol
     public Nodo<T> getRaiz() {
         return raiz;
@@ -103,7 +108,7 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
 
 
     // Crea una lista y la rellena con el recorrido en orden central
-    protected ListaSE<T> getListaordenCentral(){
+    protected ListaSE<T> getListaOrdenCentral(){
         ListaSE<T> DatosCentral= new ListaSE<>();
         return getListaOrdenCentral(raiz,DatosCentral);
     }
@@ -202,7 +207,7 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
    }
 
     // Devuelve el grado del árbol completo
-   public int gerGrado(){
+   public int getGrado(){
         return getGrado(raiz);
    }
 
@@ -354,26 +359,18 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
         while (!cola.isEmpty()) {
             actual = cola.poll();
 
-            // Hijo izquierdo
-            if (actual.getIzquierda() != null) {
+            if (actual == null) {
+                huecoEncontrado = true;
+            } else {
                 if (huecoEncontrado) {
                     return false;
                 }
+
                 cola.offer(actual.getIzquierda());
-            } else {
-                huecoEncontrado = true;
+                cola.offer(actual.getDerecha());
             }
 
-            // Hijo derecho
-            if (actual.getDerecha() != null) {
-                if (huecoEncontrado) {
-                    return false;
-                }
-                cola.offer(actual.getDerecha());
-            } else {
-                huecoEncontrado = true;
             }
-        }
 
         return true;
 
