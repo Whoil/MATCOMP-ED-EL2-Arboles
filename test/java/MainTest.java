@@ -77,4 +77,97 @@ class MainTest {
         assertEquals("[10]", arbol.getSubArbolDerecha().getListaOrdenCentral().toString());
     }
 
+    @Test
+    void nodo() {
+        Nodo<Integer> nodo = new Nodo<>(5);
+
+        assertEquals(5, nodo.getDato());
+        assertNull(nodo.getIzquierda());
+        assertNull(nodo.getDerecha());
+
+        Nodo<Integer> izq = new Nodo<>(3);
+        Nodo<Integer> der = new Nodo<>(8);
+
+        nodo.setIzquierda(izq);
+        nodo.setDerecha(der);
+        nodo.setDato(6);
+
+        assertEquals(6, nodo.getDato());
+        assertEquals(izq, nodo.getIzquierda());
+        assertEquals(der, nodo.getDerecha());
+        assertTrue(nodo.compareTo(new Nodo<>(7)) < 0);
+        assertTrue(nodo.compareTo(new Nodo<>(4)) > 0);
+        assertEquals(0, nodo.compareTo(new Nodo<>(6)));
+    }
+
+
+
+    @Test
+    void getRaiz() {
+        ArbolBinarioDeBusqueda<Integer> arbol = crearArbol();
+        assertEquals(8, arbol.getRaiz().getDato());
+    }
+    @Test
+    void subArbolesVacios() {
+        ArbolBinarioDeBusqueda<Integer> arbol = new ArbolBinarioDeBusqueda<>();
+        assertTrue(arbol.getSubArbolIzquierda().isEmpty());
+        assertTrue(arbol.getSubArbolDerecha().isEmpty());
+    }
+    @Test
+    void arbolNoHomogeneo() {
+        ArbolBinarioDeBusqueda<Integer> arbol = new ArbolBinarioDeBusqueda<>();
+        arbol.add(1);
+        arbol.add(2);
+        arbol.add(3);
+        arbol.add(4);
+
+        assertFalse(arbol.isArbolHomogeneo());
+    }
+
+    @Test
+    void giroDerecha() {
+        ArbolBinarioDeBusqueda<Integer> arbol = new ArbolBinarioDeBusqueda<>();
+        arbol.add(3);
+        arbol.add(2);
+        arbol.add(1);
+
+        assertTrue(arbol.isEquilibrado());
+        assertEquals(2, arbol.getRaiz().getDato());
+    }
+
+    @Test
+    void giroIzquierda() {
+        ArbolBinarioDeBusqueda<Integer> arbol = new ArbolBinarioDeBusqueda<>();
+        arbol.add(1);
+        arbol.add(2);
+        arbol.add(3);
+
+        assertTrue(arbol.isEquilibrado());
+        assertEquals(2, arbol.getRaiz().getDato());
+    }
+
+
+    @Test
+    void giroIzquierdaDerecha() {
+        ArbolBinarioDeBusqueda<Integer> arbol = new ArbolBinarioDeBusqueda<>();
+        arbol.add(3);
+        arbol.add(1);
+        arbol.add(2);
+
+        assertTrue(arbol.isEquilibrado());
+        assertEquals(2, arbol.getRaiz().getDato());
+    }
+
+
+    @Test
+    void giroDerechaIzquierda() {
+        ArbolBinarioDeBusqueda<Integer> arbol = new ArbolBinarioDeBusqueda<>();
+        arbol.add(1);
+        arbol.add(3);
+        arbol.add(2);
+
+        assertTrue(arbol.isEquilibrado());
+        assertEquals(2, arbol.getRaiz().getDato());
+    }
+
 }
