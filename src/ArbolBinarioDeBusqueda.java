@@ -43,13 +43,13 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
         //Comparamos de forma recursiva para decidir en qué dirección irá el dato
 
         // Si el dato es menor, irá a la izquierda
-        if(actual.dato.compareTo(dato)>0){
-            actual.izquierda=addNodo(actual.izquierda, dato);
+        if(actual.getDato().compareTo(dato)>0){
+            actual.setIzquierda(addNodo(actual.getIzquierda(), dato));
 
         }
         // Si el dato es mayor, irá a la derecha
-        else if (actual.dato.compareTo(dato)<0){
-            actual.derecha=addNodo(actual.derecha, dato);
+        else if (actual.getDato().compareTo(dato)<0){
+            actual.setDerecha(addNodo(actual.getDerecha(), dato));
         }
         return actual;
 
