@@ -280,20 +280,29 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
 
     }
 
+
+    // Devuelve una lista con los datos que se encuentran en el nivel indicado del árbol.
     public ListaSE<T> getListaDatosNivel(int nivel){
         ListaSE<T> ListaDatosNivel= new ListaSE<>();
         return getListaDatosNivel(raiz, nivel, 1,ListaDatosNivel);
     }
 
+    // Método auxiliar recursivo que recorre el árbol buscando los nodos del nivel indicado.
+
+
+
+
     private ListaSE<T> getListaDatosNivel(Nodo<T> actual, int nivelBuscado, int nivelActual, ListaSE<T> ListaNivel){
+        // Si el nodo actual es null, devuelve la lista acumulada.
         if (actual==null){
             return ListaNivel;
         }
-
+        // Si el nivel actual coincide con el nivel buscado, añade el dato del nodo a la lista.
         if(nivelActual==nivelBuscado){
             ListaNivel.addLast(actual.getDato());
             return ListaNivel;
         }
+        // Si no coincide, sigue recorriendo los subárboles izquierdo y derecho.
         getListaDatosNivel(actual.getIzquierda(),nivelBuscado,nivelActual+1,ListaNivel);
         getListaDatosNivel(actual.getDerecha(),nivelBuscado,nivelActual+1,ListaNivel);
 
@@ -303,21 +312,32 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
     }
 
 
+
+    // Comprueba si el árbol es homogéneo.
+    // Un árbol binario homogéneo solo puede tener nodos con 0 o 2 hijos.
     public boolean  isArbolHomogeneo(){
         return isArbolHomogeneo(raiz);
     }
 
+
+    // Método auxiliar recursivo que comprueba si el subárbol actual es homogéneo.
+
+
     private boolean isArbolHomogeneo(Nodo<T> actual){
+
+        // Si el nodo es null, devuelve true.
         if ((actual==null)){
             return true;
         }
-
+        // Si tiene dos hijos, comprueba recursivamente ambos subárboles.
 
         else if (actual.getDerecha()!=null &&actual.getIzquierda()!=null){
             return isArbolHomogeneo(actual.getIzquierda()) && isArbolHomogeneo(actual.getDerecha());
         }
+        // Si no tiene hijos, devuelve true.
         else if(actual.getDerecha()==null &&actual.getIzquierda()==null)return true;
 
+            // Si tiene solo un hijo, devuelve false.
         else return false;
 
 
@@ -325,25 +345,31 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
     }
 
 
+
+    // Comprueba si el árbol es completo.
+    // Un árbol es completo si todas sus hojas están a la misma profundidad.
     public boolean isArbolCompleto(){
         return isArbolCompleto(raiz, 1 ,getAlturaRaiz() );
     }
 
 
+
+    // Método auxiliar recursivo que comprueba si todas las hojas están en el mismo nivel.
+
     private boolean isArbolCompleto(Nodo<T> actual, int NivelActual, int NivelArbol ){
 
-
+        // Si el nodo es hoja, compara su nivel con la altura del árbol.
         if (actual==null) return true;
         if (actual.getIzquierda() == null && actual.getDerecha() == null) {
             if (NivelArbol == NivelActual) return true;
             else return false;
         }
-
+        // Si el nodo tiene solo un hijo, el árbol no es completo
         else if ((actual.getIzquierda() == null && actual.getDerecha() != null) ||
                 (actual.getIzquierda() != null && actual.getDerecha() == null)) {
             return false;
         }
-
+        // Si tiene dos hijos, sigue comprobando recursivamente ambos subárboles.
         else {
             return isArbolCompleto(actual.getDerecha(), NivelActual + 1, NivelArbol)
                     && isArbolCompleto(actual.getIzquierda(), NivelActual + 1, NivelArbol);
@@ -353,6 +379,9 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
     }
 
 
+    // Comprueba si el árbol es casi completo.
+    // Un árbol casi completo puede tener el último nivel incompleto,
+    // pero los nodos deben estar colocados de izquierda a derecha sin huecos intermedios.
     public boolean isArbolCasiCompleto() {
         if (raiz == null) {
             return true;
@@ -363,9 +392,12 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
 
         boolean huecoEncontrado = false;
 
+
+        // Recorre el árbol por niveles usando una cola.
+        // Si aparece un hueco, ya no puede aparecer después ningún hijo.
         while (!cola.isEmpty()) {
             Nodo<T> actual = cola.poll();
-
+            // Comprueba el hijo izquierdo
             if (actual.getIzquierda() != null) {
                 if (huecoEncontrado) {
                     return false;
@@ -374,7 +406,7 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
             } else {
                 huecoEncontrado = true;
             }
-
+            // Comprueba el hijo derecho
             if (actual.getDerecha() != null) {
                 if (huecoEncontrado) {
                     return false;
