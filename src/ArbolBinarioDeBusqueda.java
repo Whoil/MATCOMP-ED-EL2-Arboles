@@ -1,5 +1,5 @@
 
-public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
+public class ArbolBinarioDeBusqueda<T extends Comparable<T>> implements ArbolBinario<T>{
 
 
     //Nodo raiz del árbol
@@ -83,7 +83,7 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
     }
 
     //Crea una lista y la rellena del recorrido en preorden
-    protected  ListaSE<T> getListaPreOrden(){
+    public   ListaSE<T> getListaPreOrden(){
         ListaSE<T> DatosPre=new ListaSE<>();
         return getListaPreOrden(raiz, DatosPre);
     }
@@ -108,7 +108,7 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
 
 
     // Crea una lista y la rellena con el recorrido en orden central
-    protected ListaSE<T> getListaOrdenCentral(){
+    public ListaSE<T> getListaOrdenCentral(){
         ListaSE<T> DatosCentral= new ListaSE<>();
         return getListaOrdenCentral(raiz,DatosCentral);
     }
@@ -132,7 +132,7 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
 
 
     // Crea una lista y la rellena con el recorrido en postorden
-   protected ListaSE<T> getListaPostOrden(){
+   public ListaSE<T> getListaPostOrden(){
         ListaSE<T> DatosPost=new ListaSE<>();
         return getListaPostorden(raiz,DatosPost);
    }
@@ -152,7 +152,7 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
    }
 
     // Devuelve el subárbol derecho del árbol actual
-   protected ArbolBinarioDeBusqueda<T> getSubArbolDerecha(){
+   public ArbolBinarioDeBusqueda<T> getSubArbolDerecha(){
        // Devuelve el subárbol derecho del árbol actual
          ArbolBinarioDeBusqueda<T> SubArbol=new ArbolBinarioDeBusqueda<>(raiz);
        // Si el árbol actual está vacío, se devuelve vacío
@@ -167,7 +167,7 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>>{
    }
 
     // Devuelve el subárbol izquierdo del árbol actual
-   protected ArbolBinarioDeBusqueda<T> getSubArbolIzquierda(){
+   public ArbolBinarioDeBusqueda<T> getSubArbolIzquierda(){
        // Se crea un nuevo árbol inicialmente con raíz nula
         ArbolBinarioDeBusqueda<T> SubArbol= new ArbolBinarioDeBusqueda<>(raiz);
 
