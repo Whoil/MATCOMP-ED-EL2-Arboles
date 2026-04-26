@@ -28,7 +28,7 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>> implements ArbolBin
         this.raiz = raiz;
     }
 
-    //Comprueba que el árbol no está vacío
+    // Comprueba si el árbol está vacío
     public boolean isEmpty(){
         return raiz==null; // devuelve true si no hay nodo raiz ( el árbol es vacío)
     }
@@ -46,7 +46,6 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>> implements ArbolBin
         if(actual==null){
 
             return new Nodo<>(dato);
-
         }
         //Comparamos de forma recursiva para decidir en qué dirección irá el dato
 
