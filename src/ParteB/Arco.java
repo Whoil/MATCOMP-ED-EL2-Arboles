@@ -4,7 +4,7 @@ public class Arco<T> {
     private long id;
     private Nodo<T> origen;
     private Nodo<T> destino;
-    private T dato;
+    private String dato;
 
     public Arco(){
         this.id=0;
@@ -14,21 +14,28 @@ public class Arco<T> {
 
     }
 
-    public Arco( long id, Nodo<T> destino, Nodo<T> origen, T dato){
+    public Arco( long id, Nodo<T> destino, Nodo<T> origen, String dato){
         this.id=id;
         this.destino=destino;
         this.origen=origen;
         this.dato=dato;
     }
 
-
-
-    public T getDato() {
-        return dato;
+    public long getId() {
+        return id;
     }
 
-    public void setDato(T dato) {
-        this.dato = dato;
+    public void setId(long id) {
+        this.id = id;
+    }
+
+
+    public Nodo<T> getOrigen() {
+        return origen;
+    }
+
+    public void setOrigen(Nodo<T> origen) {
+        this.origen = origen;
     }
 
 
@@ -40,20 +47,12 @@ public class Arco<T> {
         this.destino = destino;
     }
 
-    public Nodo<T> getOrigen() {
-        return origen;
+    public String getDato() {
+        return dato;
     }
 
-    public void setOrigen(Nodo<T> origen) {
-        this.origen = origen;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+    public void setDato(String dato) {
+        this.dato = dato;
     }
 
     @Override
