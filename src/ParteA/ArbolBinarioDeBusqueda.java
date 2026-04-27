@@ -220,7 +220,7 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>> implements ArbolBin
 
        ListaSE<T> camino=new ListaSE<>();
 
-        boolean encontrado= getCamino(raiz, dato,camino);
+        boolean encontrado = getCamino(raiz, dato,camino);
 
        // Si el dato no se encuentra, devuelve una lista vacía.
        if(encontrado==false){

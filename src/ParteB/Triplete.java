@@ -13,14 +13,12 @@ public class Triplete {
 
     }
 
-
     public Triplete(String s, String p, String o){
         this.s=s;
         this.p=p;
         this.o=o;
 
     }
-
 
 
     public String getS() {
