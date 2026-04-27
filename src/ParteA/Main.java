@@ -1,5 +1,7 @@
 package ParteA;
 
+import Estructuras.ListaSE;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -50,6 +52,54 @@ public class Main {
         System.out.println("Preorden: " + arbolEquilibrado.getListaPreOrden());
         System.out.println("Altura del árbol: " + arbolEquilibrado.getAlturaRaiz());
         System.out.println("¿Árbol equilibrado?: " + arbolEquilibrado.isEquilibrado());
+
+        System.out.println();
+        System.out.println("PRUEBA ÁRBOL ENTEROS DE EL 0 AL 128");
+        System.out.println("-------------------------------------");
+        ArbolBinarioDeBusquedaEnteros arbolE = new ArbolBinarioDeBusquedaEnteros();
+
+        for (int i = 0; i <= 128; i++) {
+            arbolE.add(i);
+        }
+
+        System.out.println("Suma: " + arbolE.getSuma());
+        System.out.println("Preorden: " + arbolE.getSumaLista(arbolE.getListaPreOrden()));
+        System.out.println("Orden central: " + arbolE.getSumaLista(arbolE.getListaOrdenCentral()));
+        System.out.println("Postorden: " + arbolE.getSumaLista(arbolE.getListaPostOrden()));
+        System.out.println("Altura: " + arbolE.getAlturaRaiz());
+        System.out.println("Camino hasta 110: " + arbolE.getCamino(110));
+        System.out.println("Longitud camino: " + (arbolE.getCamino(110).getSize() - 1));
+
+        System.out.println();
+        System.out.println("PRUEBA ÁRBOL ENTEROS ALEATORIOS");
+        System.out.println("-------------------------------");
+
+        ArbolBinarioDeBusquedaEnteros arbolAleatorio = new ArbolBinarioDeBusquedaEnteros();
+        ListaSE<Integer> numeros = new ListaSE<>();
+
+        while (numeros.getSize() < 129) {
+            int numero = (int) (Math.random() * 129);
+
+            if (!numeros.existeDato(numero)) {
+                numeros.addLast(numero);
+            }
+        }
+
+        for (int i = 0; i < numeros.getSize(); i++) {
+            arbolAleatorio.add(numeros.get(i));
+        }
+
+        System.out.println("Números insertados: " + numeros);
+        System.out.println("Suma: " + arbolAleatorio.getSuma());
+        System.out.println("Preorden: " + arbolAleatorio.getSumaLista(arbolAleatorio.getListaPreOrden()));
+        System.out.println("Orden central: " + arbolAleatorio.getSumaLista(arbolAleatorio.getListaOrdenCentral()));
+        System.out.println("Postorden: " + arbolAleatorio.getSumaLista(arbolAleatorio.getListaPostOrden()));
+        System.out.println("Altura: " + arbolAleatorio.getAlturaRaiz());
+        System.out.println("Camino hasta 110: " + arbolAleatorio.getCamino(110));
+        System.out.println("Longitud camino: " + (arbolAleatorio.getCamino(110).getSize() - 1));
+
+
+
 
     }
 }
