@@ -1,58 +1,51 @@
 package ParteB;
 
-public class Arco<T> {
+public class Arco<T extends Comparable<T>> implements Comparable<Arco<T>> {
+
     private long id;
     private Nodo<T> origen;
     private Nodo<T> destino;
     private String dato;
 
-    public Arco(){
-        this.id=0;
-        this.destino=null;
-        this.origen=null;
-        this.dato=null;
-
+    public Arco() {
+        this.id = 0;
+        this.origen = null;
+        this.destino = null;
+        this.dato = null;
     }
 
-    public Arco( long id, Nodo<T> destino, Nodo<T> origen, String dato){
-        this.id=id;
-        this.destino=destino;
-        this.origen=origen;
-        this.dato=dato;
+    public Arco(long id, Nodo<T> origen, Nodo<T> destino, String dato) {
+        this.id = id;
+        this.origen = origen;
+        this.destino = destino;
+        this.dato = dato;
     }
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-
     public Nodo<T> getOrigen() {
         return origen;
     }
 
-    public void setOrigen(Nodo<T> origen) {
-        this.origen = origen;
-    }
-
-
     public Nodo<T> getDestino() {
         return destino;
-    }
-
-    public void setDestino(Nodo<T> destino) {
-        this.destino = destino;
     }
 
     public String getDato() {
         return dato;
     }
 
-    public void setDato(String dato) {
-        this.dato = dato;
+    @Override
+    public int compareTo(Arco<T> otro) {
+        if (this.id < otro.getId()) {
+            return -1;
+        } else if (this.id > otro.getId()) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     @Override
@@ -60,3 +53,4 @@ public class Arco<T> {
         return "(" + id + ", " + origen + ", " + dato + ", " + destino + ")";
     }
 }
+
