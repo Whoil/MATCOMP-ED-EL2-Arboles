@@ -1,5 +1,7 @@
 import ParteA.ArbolBinarioDeBusqueda;
+import ParteA.ArbolBinarioDeBusquedaEnteros;
 import ParteA.Nodo;
+import Estructuras.ListaSE;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 class MainTest {
@@ -170,6 +172,44 @@ class MainTest {
 
         assertTrue(arbol.isEquilibrado());
         assertEquals(2, arbol.getRaiz().getDato());
+    }
+
+    @Test
+    void arbolEnterosVacio() {
+        ArbolBinarioDeBusquedaEnteros arbol = new ArbolBinarioDeBusquedaEnteros();
+        ListaSE<Integer> lista = new ListaSE<>();
+
+        assertEquals(0, arbol.getSuma());
+        assertEquals(0, arbol.getSumaLista(lista));
+    }
+
+    @Test
+    void arbolEnterosSuma() {
+        ArbolBinarioDeBusquedaEnteros arbol = new ArbolBinarioDeBusquedaEnteros();
+
+        for (int i = 0; i <= 128; i++) {
+            arbol.add(i);
+        }
+
+        assertEquals(8256, arbol.getSuma());
+        assertEquals(8256, arbol.getSumaLista(arbol.getListaPreOrden()));
+        assertEquals(8256, arbol.getSumaLista(arbol.getListaOrdenCentral()));
+        assertEquals(8256, arbol.getSumaLista(arbol.getListaPostOrden()));
+    }
+
+    @Test
+    void arbolEnterosSumaSubArboles() {
+        ArbolBinarioDeBusquedaEnteros arbol = new ArbolBinarioDeBusquedaEnteros();
+
+        for (int i = 0; i <= 128; i++) {
+            arbol.add(i);
+        }
+
+        int sumaIzquierda = arbol.getSumaLista(arbol.getSubArbolIzquierda().getListaOrdenCentral());
+        int sumaDerecha = arbol.getSumaLista(arbol.getSubArbolDerecha().getListaOrdenCentral());
+        int sumaTotal = sumaIzquierda + sumaDerecha + arbol.getRaiz().getDato();
+
+        assertEquals(arbol.getSuma(), sumaTotal);
     }
 
 }
