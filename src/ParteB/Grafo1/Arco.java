@@ -1,4 +1,4 @@
-package ParteB;
+package ParteB.Grafo1;
 
 public class Arco<T extends Comparable<T>> implements Comparable<Arco<T>> {
 

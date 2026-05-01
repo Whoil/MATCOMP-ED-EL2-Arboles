@@ -1,4 +1,4 @@
-package ParteB;
+package ParteB.Grafo1;
 
 import Estructuras.ListaSE;
 import Estructuras.Cola;

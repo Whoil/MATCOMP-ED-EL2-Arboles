@@ -1,4 +1,4 @@
-package ParteB;
+package ParteB.Grafo1;
 
 public class Nodo<T extends Comparable<T>> implements Comparable<Nodo<T>> {
 

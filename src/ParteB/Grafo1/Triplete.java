@@ -1,4 +1,4 @@
-package ParteB;
+package ParteB.Grafo1;
 
 public class Triplete implements Comparable<Triplete> {
 
