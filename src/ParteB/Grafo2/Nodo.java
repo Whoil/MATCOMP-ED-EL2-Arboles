@@ -1,7 +1,7 @@
 package ParteB.Grafo2;
 import Estructuras.ListaSE;
 
-public class Nodo<T extends Comparable<T>> {
+public class Nodo<T extends Comparable<T>> implements Comparable<Nodo<T>> {
     private long id; //id para identificar el nodo
     private T dato;
     private ListaSE<Arco<T>> arcosEntrada;
@@ -52,7 +52,12 @@ public class Nodo<T extends Comparable<T>> {
         arcosSalida.addLast(arco); // añadimos al final de la lista para que queden en orden
 
     }
+    @Override
     public int compareTo(Nodo<T> otro) {
         return this.dato.compareTo(otro.dato); // comparamos el dato de cada nodo para ver si son el mismo
+    }
+    @Override
+    public String toString(){
+        return "("+ id + ", " + dato + ")";
     }
 }

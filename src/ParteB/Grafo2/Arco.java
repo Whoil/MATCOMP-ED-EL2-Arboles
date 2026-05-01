@@ -1,6 +1,6 @@
 package ParteB.Grafo2;
 
-public class Arco<T extends Comparable<T>> {
+public class Arco<T extends Comparable<T>> implements Comparable<Arco<T>> {
     private long id;
     private String dato; // aporta informacion del arco
     private Nodo<T> origen;
@@ -12,9 +12,9 @@ public class Arco<T extends Comparable<T>> {
         this.origen = origen;
         this.destino = destino;
     }
-
+    @Override
     public String toString() {
-        return origen + "--> " + destino;
+        return origen + "--" + dato + "--> " + destino;
     }
 
     public long getId() {
@@ -48,7 +48,7 @@ public class Arco<T extends Comparable<T>> {
     public void setDestino(Nodo<T> destino) {
         this.destino = destino;
     }
-
+    @Override
     public int compareTo(Arco<T> otro) {
         if (this.id < otro.getId()) {
             return -1;

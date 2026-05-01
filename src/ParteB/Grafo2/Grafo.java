@@ -1,0 +1,94 @@
+package ParteB.Grafo2;
+
+import Estructuras.ListaSE;
+import Estructuras.MiIterador;
+
+public class Grafo<T extends Comparable<T>> {
+    private ListaSE<Nodo<T>> nodos;
+    private ListaSE<Arco<T>> arcos;
+    private long idNodo; // siguiente id disponible para nodo
+    private long idArco; // siguiente id disponible para arco
+
+    public Grafo() {
+        this.nodos = new ListaSE<>();
+        this.arcos = new ListaSE<>();
+        this.idNodo = 1;
+        this.idArco = 1;
+    }
+
+    public ListaSE<Nodo<T>> getNodos() {
+        return nodos;
+    }
+
+    public ListaSE<Arco<T>> getArcos() {
+        return arcos;
+    }
+
+    public long getIdNodo() {
+        return idNodo;
+    }
+
+    public long getIdArco() {
+        return idArco;
+    }
+
+    public Nodo<T> buscarNodo(T dato){
+        MiIterador<Nodo<T>> iterador = nodos.getIterador(); // creamos un iterador para recorrer la lista de nodos
+        while(iterador.hasNext()){ // mientras el nodo no sea nulo, seguimos buscando
+            Nodo<T> actual = iterador.next();
+            if (actual.getDato().compareTo(dato) == 0){ // si encontramos un nodo con el mismo dato, lo devolvemos
+                return actual;
+            }
+        }
+        return null; // si no se encuentra el nodo que buscamos, se devuelve null
+    }
+
+    public boolean existeNodo(T dato){
+        if (buscarNodo(dato) != null){ //  si al buscar devuelve distinto de null, existe ese nodo
+            return true;
+        }
+        return false;
+    }
+
+    public Nodo<T> addNodo(T dato){
+        if (!existeNodo(dato)){
+            Nodo<T> nuevo = new Nodo<>(idNodo, dato);
+            nodos.addLast(nuevo);
+            idNodo ++;
+            return nuevo; // si no existe el nodo, se crea, se añade y se devuelve
+        }
+        return buscarNodo(dato); // si existe el nodo, se devuele el nodo existente
+    }
+
+    public Arco<T> buscarArco(Nodo<T> origen, Nodo<T> destino, String dato){
+        MiIterador<Arco<T>> iterador = arcos.getIterador(); // creamos un iterador para la lista de arcos
+        while(iterador.hasNext()){ // mientras el arco al que esta apuntando el iterador no sea nulo seguimos
+            Arco<T> actual = iterador.next();
+            if (actual.getDato().compareTo(dato) == 0 && actual.getOrigen().compareTo(origen) == 0 && actual.getDestino().compareTo(destino) == 0){
+                return actual; // si el dato, origen y destino coinciden con el del arco que buscamos, devolvemos este
+            }
+        }
+        return null; // si no encontramos el arco con el dato, origen y destino que buscamos, devuelve null
+    }
+    public boolean existeArco(Nodo<T> origen, Nodo<T> destino, String dato){
+        if (buscarArco(origen, destino, dato) != null){
+            return true; // si al buscar el arco lo encontramos, este existe y devuelve true
+        }
+        return false; // si no lo encontramos devuelve false
+    }
+
+    public Arco<T> addArco(T datoOrigen, T datoDestino, String dato){
+        Nodo<T> origen = addNodo(datoOrigen); // buscamos o creamos los nodos de origen y destino
+        Nodo<T> destino = addNodo(datoDestino);
+        if (!existeArco(origen, destino, dato)){
+            Arco<T> nuevo = new Arco<>(idArco, dato, origen, destino); // creamos un nuevo arco si no existe ya
+            arcos.addLast(nuevo); // añadimos este arco al final de la lista de arcos;
+            origen.addArcoSalida(nuevo);
+            destino.addArcoEntrada(nuevo);
+            idArco ++;
+            return nuevo;
+        }
+        return buscarArco(origen, destino, dato); // si el arco ya existe, lo devolvemos
+
+    }
+}
