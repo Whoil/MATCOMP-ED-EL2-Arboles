@@ -91,4 +91,30 @@ public class Grafo<T extends Comparable<T>> {
         return buscarArco(origen, destino, dato); // si el arco ya existe, lo devolvemos
 
     }
+    public ListaSE<T> getAdyacentes(T dato){
+        Nodo<T> nodo = buscarNodo(dato);
+        if (nodo == null){
+            return new ListaSE<>();
+        }
+        ListaSE<Arco<T>> arcosSalida = nodo.getArcosSalida();
+        MiIterador<Arco<T>> iterador = arcosSalida.getIterador();
+        ListaSE<T> adyacentes = new ListaSE<>();
+        while(iterador.hasNext()){
+            Arco<T> actual = iterador.next();
+            adyacentes.addLast(actual.getDestino().getDato());
+        }
+        return adyacentes;
+    }
+
+    @Override
+    public String toString() {
+        MiIterador<Arco<T>> iterador = arcos.getIterador();
+        String texto = "";
+        while(iterador.hasNext()){
+            Arco<T> actual = iterador.next();
+            texto = texto + actual.toString() + "\n";
+        }
+        return texto;
+
+    }
 }
