@@ -2,6 +2,7 @@ package ParteB.Grafo2;
 
 import Estructuras.ListaSE;
 import Estructuras.MiIterador;
+import Estructuras.Cola;
 
 public class Grafo<T extends Comparable<T>> {
     private ListaSE<Nodo<T>> nodos;
@@ -110,11 +111,92 @@ public class Grafo<T extends Comparable<T>> {
     public String toString() {
         MiIterador<Arco<T>> iterador = arcos.getIterador();
         String texto = "";
-        while(iterador.hasNext()){
+        while(iterador.hasNext()){ // recorremos cada arco con un iterador y lo guardamos para devolverlos todos a la vez
             Arco<T> actual = iterador.next();
             texto = texto + actual.toString() + "\n";
         }
         return texto;
+    }
 
+    public ListaSE<T> recorridoBFS(T inicio) {
+        ListaSE<T> visitados = new ListaSE<>();
+        Cola<T> cola = new Cola<>();
+        if (!existeNodo(inicio)) {
+            return visitados;
+        }
+        cola.offer(inicio);
+        visitados.addLast(inicio);
+
+        while (cola.getSize() != 0) {
+            T actual = cola.poll();
+            ListaSE<T> adyacentes = getAdyacentes(actual);
+            MiIterador<T> iterador = adyacentes.getIterador();
+            while (iterador.hasNext()) {
+                T adyacente = iterador.next();
+                if (!visitados.existeDato(adyacente)) {
+                    visitados.addLast(adyacente);
+                    cola.offer(adyacente);
+                }
+            }
+        }
+        return visitados;
+    }
+
+    public ListaSE<T> caminoMinimo(T inicio, T fin) {
+        ListaSE<T> visitados = new ListaSE<>();
+        ListaSE<T> padresNodo = new ListaSE<>();
+        ListaSE<T> padresAnterior = new ListaSE<>();
+        Cola<T> cola = new Cola<>();
+
+        if (!existeNodo(inicio) || !existeNodo(fin)) {
+            return new ListaSE<>();
+        }
+        cola.offer(inicio);
+        visitados.addLast(inicio);
+        padresNodo.addLast(inicio);
+        padresAnterior.addLast(null);
+        while (!cola.isEmpty()) {
+            T actual = cola.poll();
+
+            if (actual.compareTo(fin) == 0) {
+                return reconstruirCamino(fin, padresNodo, padresAnterior);
+            }
+            ListaSE<T> adyacentes = getAdyacentes(actual);
+            MiIterador<T> iterador = adyacentes.getIterador();
+
+            while (iterador.hasNext()) {
+                T adyacente = iterador.next();
+
+                if (!visitados.existeDato(adyacente)) {
+                    visitados.addLast(adyacente);
+                    cola.offer(adyacente);
+                    padresNodo.addLast(adyacente);
+                    padresAnterior.addLast(actual);
+                }
+            }
+        }
+        return new ListaSE<>();
+    }
+
+    private ListaSE<T> reconstruirCamino(T fin, ListaSE<T> padresNodo, ListaSE<T> padresAnterior) {
+        ListaSE<T> camino = new ListaSE<>();
+        T actual = fin;
+
+        while (actual != null) {
+            camino.addLast(actual);
+            T anterior = null;
+            MiIterador<T> iteradorNodos = padresNodo.getIterador();
+            MiIterador<T> iteradorPadres = padresAnterior.getIterador();
+            while (iteradorNodos.hasNext() && iteradorPadres.hasNext()) {
+                T nodo = iteradorNodos.next();
+                T padre = iteradorPadres.next();
+                if (nodo.compareTo(actual) == 0) {
+                    anterior = padre;
+                }
+            }
+            actual = anterior;
+        }
+        camino.invertir();
+        return camino;
     }
 }
