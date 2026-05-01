@@ -8,6 +8,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GrafoTest {
 
+    private <T extends Comparable<T>> int contarElementos(ListaSE<T> lista) {
+        int contador = 0;
+        MiIterador<T> iterador = lista.getIterador();
+
+        while (iterador.hasNext()) {
+            iterador.next();
+            contador++;
+        }
+
+        return contador;
+    }
 
     @Test
     void constructorGrafo() {
@@ -15,8 +26,8 @@ class GrafoTest {
 
         assertNotNull(grafo.getNodos());
         assertNotNull(grafo.getArcos());
-        assertEquals(0, grafo.getNodos().getSize());
-        assertEquals(0, grafo.getArcos().getSize());
+        assertEquals(0, contarElementos(grafo.getNodos()));
+        assertEquals(0, contarElementos(grafo.getArcos()));
         assertEquals(1, grafo.getIdNodo());
         assertEquals(1, grafo.getIdArco());
     }
@@ -38,7 +49,7 @@ class GrafoTest {
         assertNotNull(nodo);
         assertEquals(1, nodo.getId());
         assertEquals(10, nodo.getDato());
-        assertEquals(1, grafo.getNodos().getSize());
+        assertEquals(1, contarElementos(grafo.getNodos()));
         assertEquals(2, grafo.getIdNodo());
         assertTrue(grafo.existeNodo(10));
         assertEquals(nodo, grafo.buscarNodo(10));
@@ -52,7 +63,7 @@ class GrafoTest {
         Nodo<Integer> segundo = grafo.addNodo(10);
 
         assertSame(primero, segundo);
-        assertEquals(1, grafo.getNodos().getSize());
+        assertEquals(1, contarElementos(grafo.getNodos()));
         assertEquals(2, grafo.getIdNodo());
     }
 
@@ -77,8 +88,8 @@ class GrafoTest {
         assertEquals(1, arco.getId());
         assertEquals("une", arco.getDato());
 
-        assertEquals(2, grafo.getNodos().getSize());
-        assertEquals(1, grafo.getArcos().getSize());
+        assertEquals(2, contarElementos(grafo.getNodos()));
+        assertEquals(1, contarElementos(grafo.getArcos()));
 
         assertEquals(3, grafo.getIdNodo());
         assertEquals(2, grafo.getIdArco());
@@ -92,8 +103,8 @@ class GrafoTest {
         assertEquals(origen, arco.getOrigen());
         assertEquals(destino, arco.getDestino());
 
-        assertEquals(1, origen.getArcosSalida().getSize());
-        assertEquals(1, destino.getArcosEntrada().getSize());
+        assertEquals(1, contarElementos(origen.getArcosSalida()));
+        assertEquals(1, contarElementos(destino.getArcosEntrada()));
     }
 
     @Test
@@ -104,8 +115,8 @@ class GrafoTest {
         Arco<Integer> segundo = grafo.addArco(10, 20, "une");
 
         assertSame(primero, segundo);
-        assertEquals(2, grafo.getNodos().getSize());
-        assertEquals(1, grafo.getArcos().getSize());
+        assertEquals(2, contarElementos(grafo.getNodos()));
+        assertEquals(1, contarElementos(grafo.getArcos()));
         assertEquals(3, grafo.getIdNodo());
         assertEquals(2, grafo.getIdArco());
     }
@@ -150,7 +161,7 @@ class GrafoTest {
 
         ListaSE<Integer> adyacentes = grafo.getAdyacentes(10);
 
-        assertEquals(2, adyacentes.getSize());
+        assertEquals(2, contarElementos(adyacentes));
 
         MiIterador<Integer> iterador = adyacentes.getIterador();
 
@@ -170,7 +181,7 @@ class GrafoTest {
         ListaSE<Integer> adyacentes = grafo.getAdyacentes(999);
 
         assertNotNull(adyacentes);
-        assertEquals(0, adyacentes.getSize());
+        assertEquals(0, contarElementos(adyacentes));
     }
 
     @Test

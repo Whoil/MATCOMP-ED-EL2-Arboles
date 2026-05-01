@@ -4,7 +4,7 @@ import Estructuras.ListaSE;
 import Estructuras.MiIterador;
 import Estructuras.Cola;
 
-public class Grafo<T extends Comparable<T>> {
+public class Grafo<T extends Comparable<T>> implements InterfazGrafo<T> {
     private ListaSE<Nodo<T>> nodos;
     private ListaSE<Arco<T>> arcos;
     private long idNodo; // siguiente id disponible para nodo
@@ -119,6 +119,7 @@ public class Grafo<T extends Comparable<T>> {
     }
 
     public ListaSE<T> recorridoBFS(T inicio) {
+        // Recorremos el grafo desde un nodo usando una cola, para visitar por niveles
         ListaSE<T> visitados = new ListaSE<>();
         Cola<T> cola = new Cola<>();
         if (!existeNodo(inicio)) {
@@ -143,6 +144,8 @@ public class Grafo<T extends Comparable<T>> {
     }
 
     public ListaSE<T> caminoMinimo(T inicio, T fin) {
+        // Hacemos un BFS guardando el nodo anterior de cada nodo visitado
+        // Asi luego podemos reconstruir el camino desde el final hasta el inicio
         ListaSE<T> visitados = new ListaSE<>();
         ListaSE<T> padresNodo = new ListaSE<>();
         ListaSE<T> padresAnterior = new ListaSE<>();
@@ -179,6 +182,8 @@ public class Grafo<T extends Comparable<T>> {
     }
 
     private ListaSE<T> reconstruirCamino(T fin, ListaSE<T> padresNodo, ListaSE<T> padresAnterior) {
+        // Reconstruimos el camino yendo hacia atras
+        // Al final invertimos la lista
         ListaSE<T> camino = new ListaSE<>();
         T actual = fin;
 
@@ -198,5 +203,82 @@ public class Grafo<T extends Comparable<T>> {
         }
         camino.invertir();
         return camino;
+    }
+
+    public ListaSE<T> getVecinosNoDirigido(T dato) {
+        // Para comprobar si el grafo es disjunto miramos el grafo como no dirigido, por eso cogemos tanto los arcos que salen como los que entran
+        Nodo<T> nodo = buscarNodo(dato);
+        ListaSE<T> vecinos = new ListaSE<>();
+
+        if (nodo == null) {
+            return vecinos;
+        }
+        ListaSE<Arco<T>> arcosSalida = nodo.getArcosSalida();
+        MiIterador<Arco<T>> iteradorSalida = arcosSalida.getIterador();
+        while (iteradorSalida.hasNext()) {
+            Arco<T> actual = iteradorSalida.next();
+            T destino = actual.getDestino().getDato();
+
+            if (!vecinos.existeDato(destino)) {
+                vecinos.addLast(destino);
+            }
+        }
+
+        ListaSE<Arco<T>> arcosEntrada = nodo.getArcosEntrada();
+        MiIterador<Arco<T>> iteradorEntrada = arcosEntrada.getIterador();
+
+        while (iteradorEntrada.hasNext()) {
+            Arco<T> actual = iteradorEntrada.next();
+            T origen = actual.getOrigen().getDato();
+
+            if (!vecinos.existeDato(origen)) {
+                vecinos.addLast(origen);
+            }
+        }
+
+        return vecinos;
+    }
+
+    public ListaSE<T> recorridoBFSNoDirigido(T inicio) {
+        // Es el mismo BFS, pero usando vecinos no dirigidos en vez de solo adyacentes
+        ListaSE<T> visitados = new ListaSE<>();
+        Cola<T> cola = new Cola<>();
+
+        if (!existeNodo(inicio)) {
+            return visitados;
+        }
+
+        cola.offer(inicio);
+        visitados.addLast(inicio);
+
+        while (!cola.isEmpty()) {
+            T actual = cola.poll();
+            ListaSE<T> vecinos = getVecinosNoDirigido(actual);
+            MiIterador<T> iterador = vecinos.getIterador();
+
+            while (iterador.hasNext()) {
+                T vecino = iterador.next();
+
+                if (!visitados.existeDato(vecino)) {
+                    visitados.addLast(vecino);
+                    cola.offer(vecino);
+                }
+            }
+        }
+
+        return visitados;
+    }
+
+    public boolean isDisjunto() {
+        // Un grafo es disjunto si desde el primer nodo no llegamos a todos los nodos
+        // Usamos el recorrido no dirigido para comprobar componentes separadas
+        if (nodos.isEmpty()) {
+            return false;
+        }
+
+        Nodo<T> primero = nodos.get(0);
+        ListaSE<T> visitados = recorridoBFSNoDirigido(primero.getDato());
+
+        return visitados.getSize() != nodos.getSize(); // Si desde un nodo puedo llegar a todos los demas, es no disjunto
     }
 }
