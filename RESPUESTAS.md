@@ -37,7 +37,7 @@
     vi. ¿Cuál es el camino para llegar al valor 110? ¿Cuál es su longitud de camino?
 
         En el árbol aleatorio, el camino para llegar al valor 110 depende del orden en el que se hayan insertado los números.
-        Ya que el 110 no siempre va a estar wen el mismo nivel respecto a la raiz ni en el mismo nodo, ya que se insertan numeros aleatoriamente.
+        Ya que el 110 no siempre va a estar en el mismo nivel respecto a la raiz ni en el mismo nodo, ya que se insertan numeros aleatoriamente.
 
 * Explique las diferencias (si las ha habido) de los resultados obtenidos entre los dos programas de prueba.
 
@@ -77,7 +77,7 @@ Para comprobarlo hemos creado dos archivos: conectado.json y disjunto.json, en e
 
 ¿Qué físico famoso nació en la misma ciudad que Einstein?
 Lo primero es buscar dónde nació Einstein, después recorremos las personas del grafo y comprobamos si son físicos, si tienen premio Nobel de Física y si nacieron en la misma ciudad que Einstein.
-Con nuestro JSON la respuesta es persona: MaxBorn.
+Con nuestro JSON la respuesta es persona:MaxBorn.
 
 ## Tripleta de Antonio y lugares de nacimiento de premios Nobel
 
@@ -91,7 +91,7 @@ Los caminos que se recorren son persona --premio--> premio y persona --nace_en--
 
 ## Tipos de nodos
 
-En el grafo los nodos son el sujeto (nodo de origen) y el objeto (nodo del predicado) que aparecen en las tripletas.
+En el grafo los nodos son el sujeto (nodo de origen) y el objeto (nodo destino) que aparecen en las tripletas.
 Los tipos que usamos son persona, lugar, premio, profesión y sin_tipo.
 El tipo se obtiene mirando lo que aparece antes de los dos puntos. Por ejemplo, persona:Einstein es de tipo persona y 1921 es sin_tipo porque no tiene dos puntos.
 

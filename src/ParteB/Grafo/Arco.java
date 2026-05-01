@@ -1,6 +1,6 @@
-package ParteB.Grafo2;
+package ParteB.Grafo;
 
-public class Arco<T extends Comparable<T>> implements Comparable<Arco<T>> {
+public class Arco<T extends Comparable<T>> implements InterfazArco<T>, Comparable<Arco<T>> {
     private long id;
     private String dato; // aporta informacion del arco
     private Nodo<T> origen;

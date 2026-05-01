@@ -1,4 +1,4 @@
-package ParteB.Grafo2;
+package ParteB.Grafo;
 
 public class DatosGrafo {
     private String[] tipos;

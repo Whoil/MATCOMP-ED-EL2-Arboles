@@ -1,7 +1,7 @@
-package ParteB.Grafo2;
+package ParteB.Grafo;
 import Estructuras.ListaSE;
 
-public class Nodo<T extends Comparable<T>> implements Comparable<Nodo<T>> {
+public class Nodo<T extends Comparable<T>> implements InterfazNodo<T>, Comparable<Nodo<T>> {
     private long id; //id para identificar el nodo
     private T dato;
     private ListaSE<Arco<T>> arcosEntrada;

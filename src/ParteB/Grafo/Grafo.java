@@ -1,4 +1,4 @@
-package ParteB.Grafo2;
+package ParteB.Grafo;
 
 import Estructuras.ListaSE;
 import Estructuras.MiIterador;
@@ -58,7 +58,7 @@ public class Grafo<T extends Comparable<T>> implements InterfazGrafo<T> {
             idNodo ++;
             return nuevo; // si no existe el nodo, se crea, se añade y se devuelve
         }
-        return buscarNodo(dato); // si existe el nodo, se devuele el nodo existente
+        return buscarNodo(dato); // si existe el nodo, se devuelve el nodo existente
     }
 
     public Arco<T> buscarArco(Nodo<T> origen, Nodo<T> destino, String dato){

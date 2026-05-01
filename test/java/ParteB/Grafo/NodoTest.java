@@ -1,7 +1,6 @@
-package ParteB.Grafo2;
+package ParteB.Grafo;
 
 import Estructuras.ListaSE;
-import Estructuras.MiIterador;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,4 +1,4 @@
-package ParteB.Grafo2;
+package ParteB.Grafo;
 
 import java.io.IOException;
 
@@ -24,7 +24,7 @@ public class MainPractica {
         System.out.println("Fisicos nacidos como Einstein:");
         System.out.println(nobel.getFisicosNacidosComoEinstein());
 
-        // Añadimos la tripleta de Antonio
+        // Anadimos la tripleta de Antonio
         nobel.addTriplete(new Triplete("persona:Antonio", "nace_en", "lugar:Villarrubia de los Caballeros"));
 
         System.out.println("Lugares nacimiento premios Nobel:");
