@@ -58,6 +58,10 @@ public class ArbolBinarioDeBusqueda<T extends Comparable<T>> implements ArbolBin
         else if (actual.getDato().compareTo(dato)<0){
             actual.setDerecha(addNodo(actual.getDerecha(), dato));
         }
+
+        // Este árbol binario de búsqueda se equilibra automáticamente tras cada inserción.
+        // Por eso, aunque se inserten los números en orden, el árbol no queda degenerado.
+        // Esto afecta especialmente a la altura y al camino hasta un dato concreto.
         return equilibrarArbol(actual);
 
     }
