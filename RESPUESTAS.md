@@ -1,3 +1,5 @@
+# RESPUESTAS PL2a - Árbol binario
+
 3.
     iv. Verifica que la suma es la misma cuando se suman los elementos de los subárboles izquierdo y derecho. ¿Por qué?
 
@@ -51,3 +53,60 @@
     El programa aleatorio puede cambiar algunos resultados cada vez que se ejecuta, porque el orden de inserción cambia.
     La suma total seguirá siendo siempre 8256, pero pueden cambiar el camino hasta el valor 110, la longitud de ese camino, la raíz y la forma del árbol.
     La altura suele mantenerse en 8 porque el árbol está equilibrado, aunque en alguna ejecución podría cambiar ligeramente.
+
+# RESPUESTAS PL2b - Grafos
+
+## Camino mínimo entre dos entidades
+
+Para calcular el camino mínimo usamos BFS.
+BFS usa una cola y visita primero los nodos más cercanos al origen.
+Además de la cola, guardamos los nodos visitados y también de qué nodo venimos. Esto nos permite reconstruir el camino al final.
+Por ejemplo, si llegamos a D desde B, y a B desde A, podemos reconstruir el camino A -> B -> D. 
+En el main vemos un ejemplo de camino minimo entre Einstein y Ulm, quedando esto: Camino minimo Einstein Ulm:
+[persona:Einstein, lugar:Ulm]
+
+## Grafo disjunto
+
+Un grafo es disjunto si está separado en varias partes.
+Para comprobarlo hacemos un BFS no dirigido desde el primer nodo.
+Si el recorrido visita todos los nodos, el grafo no es disjunto; sino, sí que es disjunto.
+Usamos BFS no dirigido porque si tenemos en cuenta el sentido de las flechas, habrá casos en los que parezca que es disjunto por no poder llegar a ciertos nodos, pero estos estén conectados
+Para comprobarlo hemos creado dos archivos: conectado.json y disjunto.json, en el segundo hay grupos separados y en el primero no.
+
+## Einstein
+
+¿Qué físico famoso nació en la misma ciudad que Einstein?
+Lo primero es buscar dónde nació Einstein, después recorremos las personas del grafo y comprobamos si son físicos, si tienen premio Nobel de Física y si nacieron en la misma ciudad que Einstein.
+Con nuestro JSON la respuesta es persona: MaxBorn.
+
+## Tripleta de Antonio y lugares de nacimiento de premios Nobel
+
+Antonio se añade con la tripleta <"persona:Antonio", "nace_en", "lugar:Villarrubia de los Caballeros">
+Para sacar los lugares de nacimiento de premios Nobel recorremos las personas,
+para cada persona miramos si tiene una relación premio y si tiene una relación nace_en.
+Si las dos se cumplen, añadimos su lugar de nacimiento a la lista.
+Antonio no sale como premio Nobel porque no tiene relación premio.
+Los caminos que se recorren son persona --premio--> premio y persona --nace_en--> lugar.
+
+
+## Tipos de nodos
+
+En el grafo los nodos son el sujeto (nodo de origen) y el objeto (nodo del predicado) que aparecen en las tripletas.
+Los tipos que usamos son persona, lugar, premio, profesión y sin_tipo.
+El tipo se obtiene mirando lo que aparece antes de los dos puntos. Por ejemplo, persona:Einstein es de tipo persona y 1921 es sin_tipo porque no tiene dos puntos.
+
+## ¿Qué es una ontología?
+
+Una ontología sirve para definir qué tipos de cosas hay en un problema y qué relaciones pueden tener entre ellas.
+En nuestro caso, una persona puede nacer en un lugar, puede tener una profesión y puede tener un premio.
+
+## Relación entre ontología y grafos
+
+Un grafo sirve para representar una ontología porque los nodos son elementos y los arcos sus relaciones.
+Por ejemplo, la tripleta persona:Einstein, nace_en, lugar:Ulm se guarda como un arco que va desde persona:Einstein hasta lugar:Ulm con la relación nace_en.
+
+## Ontología en nuestro problema
+
+Nuestra ontología tendría tipos como persona, lugar, premio y profesión.
+También tendría relaciones como nace_en, premio y profesión, lo que ayuda a saber qué significa cada nodo y cada arco del grafo.
+
