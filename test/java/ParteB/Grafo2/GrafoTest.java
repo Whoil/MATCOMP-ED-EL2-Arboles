@@ -104,7 +104,7 @@ class GrafoTest {
         Arco<Integer> segundo = grafo.addArco(10, 20, "une");
 
         assertSame(primero, segundo);
-        assertEquals(2, grafo.getNodos().getIterador());
+        assertEquals(2, grafo.getNodos().getSize());
         assertEquals(1, grafo.getArcos().getSize());
         assertEquals(3, grafo.getIdNodo());
         assertEquals(2, grafo.getIdArco());
