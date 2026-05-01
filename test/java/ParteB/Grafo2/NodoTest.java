@@ -8,18 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class NodoTest {
 
-    private <T extends Comparable<T>> int contarElementos(ListaSE<T> lista) {
-        int contador = 0;
-        MiIterador<T> iterador = lista.getIterador();
-
-        while (iterador.hasNext()) {
-            iterador.next();
-            contador++;
-        }
-
-        return contador;
-    }
-
     @Test
     void constructorYGetters() {
         Nodo<Integer> nodo = new Nodo<>(1, 10);
@@ -28,8 +16,8 @@ class NodoTest {
         assertEquals(10, nodo.getDato());
         assertNotNull(nodo.getArcosEntrada());
         assertNotNull(nodo.getArcosSalida());
-        assertEquals(0, contarElementos(nodo.getArcosEntrada()));
-        assertEquals(0, contarElementos(nodo.getArcosSalida()));
+        assertEquals(0, nodo.getArcosEntrada().getSize());
+        assertEquals(0, nodo.getArcosSalida().getSize());
     }
 
     @Test
@@ -58,8 +46,8 @@ class NodoTest {
         origen.setArcosEntrada(entrada);
         origen.setArcosSalida(salida);
 
-        assertEquals(1, contarElementos(origen.getArcosEntrada()));
-        assertEquals(1, contarElementos(origen.getArcosSalida()));
+        assertEquals(1, origen.getArcosEntrada().getSize());
+        assertEquals(1, origen.getArcosSalida().getSize());
     }
 
     @Test
@@ -71,8 +59,8 @@ class NodoTest {
         origen.addArcoSalida(arco);
         destino.addArcoEntrada(arco);
 
-        assertEquals(1, contarElementos(origen.getArcosSalida()));
-        assertEquals(1, contarElementos(destino.getArcosEntrada()));
+        assertEquals(1, origen.getArcosSalida().getSize());
+        assertEquals(1, destino.getArcosEntrada().getSize());
     }
 
     @Test
